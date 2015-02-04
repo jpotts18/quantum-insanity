@@ -1,0 +1,12 @@
+[
+	{
+		"name":"User",
+		"methods": {
+			"create" : true,
+			"get": true,
+			"getAll": true,
+			"update": true,
+			"delete": true
+		}
+	}
+]

@@ -1,0 +1,8 @@
+import Foundation
+
+class <%= @model["name"] %> {
+	<% @model["fields"].each do |field| %>
+	var <%= field["name"] %>:<%= field["dataType"].capitalize %>?<% end %>
+
+	init(){}
+}

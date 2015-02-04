@@ -1,0 +1,52 @@
+[
+	{
+		"name":"User",
+		"fields": [
+			{
+				"name":"email",
+				"dataType":"string"
+			},
+			{
+				"name":"password",
+				"dataType":"string"
+			},
+			{
+				"name":"firstName",
+				"dataType":"string"
+			},
+			{
+				"name":"lastName",
+				"dataType":"string"
+			},
+			{
+				"name":"phoneNumber",
+				"dataType":"string"
+			}
+		] 
+	},
+	{
+		"name": "Request",
+		"fields": [
+			{
+				"name":"id",
+				"dataType": "int"	
+			},
+			{
+				"name":"domain",
+				"dataType": "string"
+			},
+			{
+				"name":"image",
+				"dataType":"string"
+			},
+			{
+				"name":"resource",
+				"dataType":"string"
+			},
+			{
+				"name": "domain_score",
+				"dataType": "double"
+			}
+		]
+	}
+]

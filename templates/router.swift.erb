@@ -1,0 +1,56 @@
+enum <%= @net['name'].capitalize %>Router: URLRequestConvertible {
+    static let baseURL = '<%= @net['baseURL'].downcase %>'
+    static var OAuthToken: String?
+
+    case Create<%= @net['name'].capitalize %>([String: AnyObject])
+    case Read<%= @net['name'].capitalize %>(Int)
+    case Update<%= @net['name'].capitalize %>(Int, [String: AnyObject])
+    case Destroy<%= @net['name'].capitalize %>(Int)
+
+    var method: Alamofire.Method {
+        switch self {
+        case .Create<%= @net['name'].capitalize %>:
+            return .POST
+        case .Read<%= @net['name'].capitalize %>:
+            return .GET
+        case .Update<%= @net['name'].capitalize %>:
+            return .PUT
+        case .Destroy<%= @net['name'].capitalize %>:
+            return .DELETE
+        }
+    }
+
+    var path: String {
+        switch self {
+        case .Create<%= @net['name'].capitalize %>:
+            return '<%= @net['endpoint'].downcase %>'
+        case .Read<%= @net['name'].capitalize %>(let id):
+            return '<%= @net['endpoint'].downcase %>/\(id)'
+        case .Update<%= @net['name'].capitalize %>let id, _):
+            return '<%= @net['endpoint'].downcase %>/\(id)'
+        case .Destroy<%= @net['name'].capitalize %>(let id):
+            return '<%= @net['endpoint'].downcase %>/\(id)'
+        }
+    }
+
+    // MARK: URLRequestConvertible
+
+    var URLRequest: NSURLRequest {
+        let URL = NSURL(string: Router.baseURL)!
+        let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
+        mutableURLRequest.HTTPMethod = method.rawValue
+
+        if let token = Router.OAuthToken {
+            mutableURLRequest.setValue('Bearer \(token)', forHTTPHeaderField: 'Authorization')
+        }
+
+        switch self {
+        case .Create<%= @net['name'].capitalize %>(let parameters):
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
+        case .Update<%= @net['name'].capitalize %>(_, let parameters):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        default:
+            return mutableURLRequest
+        }
+    }
+}
