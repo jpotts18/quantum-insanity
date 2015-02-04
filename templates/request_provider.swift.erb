@@ -1,11 +1,3 @@
-//
-//  RequestController.swift
-//  pyur-ios
-//
-//  Created by Jeff Potter on 1/2/15.
-//  Copyright (c) 2015 ringseven. All rights reserved.
-//
-
 import Foundation
 import AlamoFire
 
@@ -16,6 +8,7 @@ class Network<%= @net["name"].capitalize %>Provider {
     typealias CollectionReponse = (NSError?, [<%= @net["name"].capitalize %>]?) -> Void
     typealias ItemResponse = (NSError?, <%= @net["name"].capitalize %>?) -> Void
     
+    <% if @net["methods"]["all"] %>
     class func getAll(onCompletion: CollectionReponse) {
         Alamofire.request(.GET, endpoint + "/requests")
                 .responseJSON { (_, response, responseJson, error) -> Void in
@@ -25,9 +18,7 @@ class Network<%= @net["name"].capitalize %>Provider {
                     // marshal JSON
                     onCompletion(nil, requests)
                 }
-
-    }
-
+    }<% end %><% if @net["methods"]["read"] %>
     class func get(id: Int, onCompletion: ItemResponse) {
         Alamofire.request(.GET, endpoint + "/requests/" + id)
                 .responseJSON { (_, response, responseJson, error) -> Void in
@@ -37,8 +28,7 @@ class Network<%= @net["name"].capitalize %>Provider {
                     // marshal JSON
                     onCompletion(nil, requests)
                 }
-    }
-
+    }<% end %><% if @net["methods"]["update"] %>
     class func update(id: Int, <%= @net["name"].downcase %>: <%= @net["name"].capitalize %>,  onCompletion: ItemResponse) {
         Alamofire.request(.PUT, endpoint + "/requests/" + id, parameters: <%= @net["name"].downcase %>, encoding: .JSON)
                 .responseJSON { (_, response, responseJson, error) -> Void in
@@ -48,8 +38,7 @@ class Network<%= @net["name"].capitalize %>Provider {
                 // marshal JSON
                 onCompletion(nil, requests)
         }
-    }
-
+    }<% end %><% if @net["methods"]["delete"] %>
      class func delete(id: Int, onCompletion: ItemResponse) {
         Alamofire.request(.DELETE, endpoint + "/requests/" + id, parameters: <%= @net["name"].downcase %>, encoding: .JSON)
                 .responseJSON { (_, response, responseJson, error) -> Void in
@@ -59,6 +48,6 @@ class Network<%= @net["name"].capitalize %>Provider {
                 // marshal JSON
                 onCompletion(nil, requests)
         }
-    }
+    }<% end %>
 }
 

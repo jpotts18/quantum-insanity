@@ -1,0 +1,81 @@
+---
+  - 
+    name: "User"
+    endpoint: "/users"
+    views:
+      table: true
+      show: true
+    methods: 
+      create: true
+      read: true
+      update: true
+    fields: 
+      - 
+        name: "id"
+        dataType: "int"
+      - 
+        name: "email"
+        dataType: "string"
+      - 
+        name: "password"
+        dataType: "string"
+      - 
+        name: "firstName"
+        dataType: "string"
+      - 
+        name: "lastName"
+        dataType: "string"
+      - 
+        name: "phoneNumber"
+        dataType: "string"
+  - 
+    name: "Request"
+    endpoint: "/requests"
+    methods: 
+      create: true
+      read: true
+      update: true
+      delete: true
+      all: true
+    fields: 
+      - 
+        name: "id"
+        dataType: "int"
+      - 
+        name: "domain"
+        dataType: "string"
+      - 
+        name: "image"
+        dataType: "string"
+      - 
+        name: "resource"
+        dataType: "string"
+
+  -
+    name: "Domain"
+    endpoint: "/domains"
+    methods:
+      all: true
+    fields:
+      -
+        name: "id"
+        dataType: "int"
+      -
+        name: "name"
+        dataType: "string"
+      - 
+        name: "userId"
+        dataType: "int"
+  -
+    name: "Device"
+    endpoint: "/devices"
+    methods:
+      all: true
+    fields:
+      -
+        name: "id"
+        dataType: "int"
+      -
+        name: "name"
+        dataType: "string"
+

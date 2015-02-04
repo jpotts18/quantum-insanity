@@ -3,7 +3,7 @@ import Foundation
 // Protocol
 protocol Network<%= @ctrl["name"] %>Delegate {
     func networkError(error:NSError)
-    func network<%= @ctrl["name"].capitalize %>ListSuccess(list:[<%= @ctrl["name"].capitalize %>])
+    func network<%= @ctrl["name"].capitalize %>CollectionSuccess(list:[<%= @ctrl["name"].capitalize %>])
     func network<%= @ctrl["name"].capitalize %>Success(<%= @ctrl["name"].downcase %>:<%= @ctrl["name"].capitalize %>)
 }
 
@@ -15,32 +15,27 @@ class <%=@ctrl["name"].capitalize%>Controller {
 	init (delegate:Network<%= @ctrl["name"].capitalize %>Delegate) {
 		self.delegate = delegate
 	}	
-
+	<% if @ctrl["methods"]["create"] %>
 	func create(<%= @ctrl["name"].downcase %>: <%= @ctrl["name"].capitalize %>) {
 		
-	}
-
+	}<% end %><% if @ctrl["methods"]["read"] %>
 	func get(id: Int){
 
-	}
-
+	}<% end %><% if @ctrl["methods"]["update"] %>
 	func update(id: Int, <%= @ctrl["name"].downcase %>: <%= @ctrl["name"].capitalize %>){
 
-	}
-
+	}<% end %><% if @ctrl["methods"]["update"] %>
 	func delete(id: Int){
 
-	}
-
+	}<% end %><% if @ctrl["methods"]["all"] %>
 	func getAll(){
 		<%= @ctrl["name"].capitalize %>Provider.getAll { (error:NSError?, <%= @ctrl["name"].downcase %>: [<%= @ctrl["name"].capitalize %>]?) -> Void in
             if (error != nil) {
                 // call error handler for 401 etc
                 delegate.networkError(error!)
             } else {
-            	delegate.network<%= @ctrl["name"].capitalize %>ListSuccess(<%= @ctrl["name"].downcase %>!)
+            	delegate.network<%= @ctrl["name"].capitalize %>CollectionSuccess(<%= @ctrl["name"].downcase %>!)
             }
         }
-	}
-	
+	}<% end %>
 }

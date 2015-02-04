@@ -1,5 +1,8 @@
+import Foundation
+import Alamofire
+
 enum <%= @net['name'].capitalize %>Router: URLRequestConvertible {
-    static let baseURL = '<%= @net['baseURL'].downcase %>'
+    static let baseURL = "<%= @net['baseURL'].downcase %>"
     static var OAuthToken: String?
 
     case Create<%= @net['name'].capitalize %>([String: AnyObject])
@@ -23,25 +26,25 @@ enum <%= @net['name'].capitalize %>Router: URLRequestConvertible {
     var path: String {
         switch self {
         case .Create<%= @net['name'].capitalize %>:
-            return '<%= @net['endpoint'].downcase %>'
+            return "<%= @net['endpoint'].downcase %>"
         case .Read<%= @net['name'].capitalize %>(let id):
-            return '<%= @net['endpoint'].downcase %>/\(id)'
-        case .Update<%= @net['name'].capitalize %>let id, _):
-            return '<%= @net['endpoint'].downcase %>/\(id)'
+            return "<%= @net['endpoint'].downcase %>/\(id)"
+        case .Update<%= @net['name'].capitalize %>(let id, _):
+            return "<%= @net['endpoint'].downcase %>/\(id)"
         case .Destroy<%= @net['name'].capitalize %>(let id):
-            return '<%= @net['endpoint'].downcase %>/\(id)'
+            return "<%= @net['endpoint'].downcase %>/\(id)"
         }
     }
 
     // MARK: URLRequestConvertible
 
     var URLRequest: NSURLRequest {
-        let URL = NSURL(string: Router.baseURL)!
+        let URL = NSURL(string: <%= @net['name'].capitalize %>Router.baseURL)!
         let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
         mutableURLRequest.HTTPMethod = method.rawValue
 
-        if let token = Router.OAuthToken {
-            mutableURLRequest.setValue('Bearer \(token)', forHTTPHeaderField: 'Authorization')
+        if let token = <%= @net['name'].capitalize %>Router.OAuthToken {
+            mutableURLRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
 
         switch self {

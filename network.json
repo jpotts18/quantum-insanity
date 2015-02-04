@@ -1,7 +1,0 @@
-[
-	{
-		"name": "Request",
-		"baseURL": "http://private-eb2c3-mockpyur.apiary-mock.com",
-		"endpoint":"/requests"
-	}
-]

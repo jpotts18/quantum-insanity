@@ -1,0 +1,28 @@
+import Foundation
+
+class <%= @vc["name"].capitalize %>TableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+
+    var dataStore:InMemoryDataStore?
+    var <%= @vc["name"].downcase %>list:[<%= @vc["name"].capitalize %>] = []
+    
+    override func viewDidLoad(){
+        
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
+        var simpleIdentifier:String = "SimpleIdentifier"
+        
+        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier(simpleIdentifier, forIndexPath: indexPath) as UITableViewCell
+    
+        cell.textLabel?.text = <%= @vc["name"].downcase %>list[indexPath.row].name
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return devices.count
+    }
+    
+    
+}
