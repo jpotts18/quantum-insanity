@@ -61,8 +61,14 @@
         name: "id"
         dataType: "int"
       -
-        name: "name"
+        name: "url"
         dataType: "string"
+      -
+        name: "imageUrl"
+        dataType: "string"
+      -
+        name: "domainId"
+        dataType: "int"
       - 
         name: "userId"
         dataType: "int"
@@ -78,4 +84,25 @@
       -
         name: "name"
         dataType: "string"
-
+  -
+    name: "Category"
+    endpoint: "/categories"
+    methods: 
+      all: true
+    fields:
+      -
+        name: "id"
+        dataType: "int"
+      -
+        name: "name"
+        dataType: "string"
+  -
+    name: "Label"
+    endpoint: "/labels"
+    fields:
+      -
+        name: "id"
+        dataType: "int"
+      -
+        name: "name"
+        dataType: "string"

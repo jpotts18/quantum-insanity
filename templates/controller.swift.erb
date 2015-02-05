@@ -3,7 +3,7 @@ import Foundation
 // Protocol
 protocol Network<%= @ctrl["name"] %>Delegate {
     func networkError(error:NSError)
-    func network<%= @ctrl["name"].capitalize %>CollectionSuccess(list:[<%= @ctrl["name"].capitalize %>])
+    <% if @ctrl["methods"]["all"] %>func network<%= @ctrl["name"].capitalize %>CollectionSuccess(list:[<%= @ctrl["name"].capitalize %>])<% end %>
     func network<%= @ctrl["name"].capitalize %>Success(<%= @ctrl["name"].downcase %>:<%= @ctrl["name"].capitalize %>)
 }
 
@@ -29,7 +29,7 @@ class <%=@ctrl["name"].capitalize%>Controller {
 
 	}<% end %><% if @ctrl["methods"]["all"] %>
 	func getAll(){
-		<%= @ctrl["name"].capitalize %>Provider.getAll { (error:NSError?, <%= @ctrl["name"].downcase %>: [<%= @ctrl["name"].capitalize %>]?) -> Void in
+		Network<%= @ctrl["name"].capitalize %>Provider.getAll { (error:NSError?, <%= @ctrl["name"].downcase %>: [<%= @ctrl["name"].capitalize %>]?) -> Void in
             if (error != nil) {
                 // call error handler for 401 etc
                 delegate.networkError(error!)

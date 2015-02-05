@@ -35,9 +35,6 @@
       - 
         name: "resource"
         dataType: "string"
-      - 
-        name: "domain_score"
-        dataType: "double"
   -
     name: "Device"
     fields:
