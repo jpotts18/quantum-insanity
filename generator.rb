@@ -42,7 +42,7 @@ end
 
 def generate_networking(resource)
 	@net = resource
-	request_provider_file = File.new('gen/network/' + @net['name'].capitalize + 'RequestProvider.swift','w+')
+	request_provider_file = File.new('gen/network/Network' + @net['name'].capitalize + 'Provider.swift','w+')
 	request_provider_file.write(ERB.new(@request_provider_template).result)
 	puts '- ' + @net['name'].capitalize + 'RequestProvider'
 end

@@ -1,4 +1,9 @@
 ---
+  - name: "BetaCode"
+    endpoint: "/betaCode"
+    methods: 
+      create: true
+      read: true
   - 
     name: "User"
     endpoint: "/users"
