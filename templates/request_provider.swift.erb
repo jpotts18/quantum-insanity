@@ -1,7 +1,7 @@
 import Foundation
 import AlamoFire
 
-class Network<%= @net["name"].capitalize %>Provider {
+class Network<%= @net["name"] %>Provider {
     <% if @net["methods"]["create"] %>
     class func create(onCompletion: CollectionReponse) {
         Alamofire.request(.GET, BASE_URL + "<%= @net["endpoint"].downcase %>")
@@ -21,7 +21,7 @@ class Network<%= @net["name"].capitalize %>Provider {
                     onCompletion(nil, requests)
                 }
     }<% end %><% if @net["methods"]["update"] %>
-    class func update(id: Int, <%= @net["name"].downcase %>: <%= @net["name"].capitalize %>,  onCompletion: ItemResponse) {
+    class func update(id: Int, <%= @net["name"].downcase %>: <%= @net["name"] %>,  onCompletion: ItemResponse) {
         Alamofire.request(.PUT, BASE_URL + "<%= @net["endpoint"].downcase %>/" + id, parameters: <%= @net["name"].downcase %>, encoding: .JSON)
                 .responseJSON { (_, response, responseJson, error) -> Void in
                     if error != nil {

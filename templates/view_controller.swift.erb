@@ -1,9 +1,9 @@
 import Foundation
 
-class <%= @vc["name"].capitalize %>TableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class <%= @vc["name"] %>TableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
 
     var dataStore:InMemoryDataStore?
-    var <%= @vc["name"].downcase %>list:[<%= @vc["name"].capitalize %>] = []
+    var <%= @vc["name"].downcase %>list:[<%= @vc["name"] %>] = []
     
     override func viewDidLoad(){
         

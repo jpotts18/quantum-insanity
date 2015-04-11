@@ -3,38 +3,38 @@ import Foundation
 // Protocol
 protocol Network<%= @ctrl["name"] %>Delegate {
     func networkError(error:NSError)
-    <% if @ctrl["methods"]["all"] %>func network<%= @ctrl["name"].capitalize %>CollectionSuccess(list:[<%= @ctrl["name"].capitalize %>])<% end %>
-    func network<%= @ctrl["name"].capitalize %>Success(<%= @ctrl["name"].downcase %>:<%= @ctrl["name"].capitalize %>)
+    <% if @ctrl["methods"]["all"] %>func network<%= @ctrl["name"] %>CollectionSuccess(list:[<%= @ctrl["name"] %>])<% end %>
+    func network<%= @ctrl["name"] %>Success(<%= @ctrl["name"].downcase %>:<%= @ctrl["name"] %>)
 }
 
 // Controller
-class <%=@ctrl["name"].capitalize%>Controller {
+class <%=@ctrl["name"] %>Controller {
 
-	let delegate:Network<%= @ctrl["name"].capitalize %>Delegate
+	let delegate:Network<%= @ctrl["name"] %>Delegate
 	
-	init (delegate:Network<%= @ctrl["name"].capitalize %>Delegate) {
+	init (delegate:Network<%= @ctrl["name"] %>Delegate) {
 		self.delegate = delegate
 	}	
 	<% if @ctrl["methods"]["create"] %>
-	func create(<%= @ctrl["name"].downcase %>: <%= @ctrl["name"].capitalize %>) {
+	func create(<%= @ctrl["name"].downcase %>: <%= @ctrl["name"] %>) {
 		
 	}<% end %><% if @ctrl["methods"]["read"] %>
 	func get(id: Int){
 
 	}<% end %><% if @ctrl["methods"]["update"] %>
-	func update(id: Int, <%= @ctrl["name"].downcase %>: <%= @ctrl["name"].capitalize %>){
+	func update(id: Int, <%= @ctrl["name"].downcase %>: <%= @ctrl["name"] %>){
 
 	}<% end %><% if @ctrl["methods"]["update"] %>
 	func delete(id: Int){
 
 	}<% end %><% if @ctrl["methods"]["all"] %>
 	func getAll(){
-		Network<%= @ctrl["name"].capitalize %>Provider.getAll { (error:NSError?, <%= @ctrl["name"].downcase %>: [<%= @ctrl["name"].capitalize %>]?) -> Void in
+		Network<%= @ctrl["name"]%>Provider.getAll { (error:NSError?, <%= @ctrl["name"].downcase %>: [<%= @ctrl["name"] %>]?) -> Void in
             if (error != nil) {
                 // call error handler for 401 etc
                 delegate.networkError(error!)
             } else {
-            	delegate.network<%= @ctrl["name"].capitalize %>CollectionSuccess(<%= @ctrl["name"].downcase %>!)
+            	delegate.network<%= @ctrl["name"]%>CollectionSuccess(<%= @ctrl["name"].downcase %>!)
             }
         }
 	}<% end %>

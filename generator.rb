@@ -8,13 +8,13 @@ GENERATED_DIR = "gen/"
 
 # Cleaning
 
-FileUtils::rm_rf GENERATED_DIR
-puts 'Clean...'
-FileUtils::mkdir_p GENERATED_DIR
-FileUtils::mkdir_p GENERATED_DIR + 'models/'
-FileUtils::mkdir_p GENERATED_DIR + 'controllers/'
-FileUtils::mkdir_p GENERATED_DIR + 'network/'
-FileUtils::mkdir_p GENERATED_DIR + 'view_controllers/'
+# FileUtils::rm_rf GENERATED_DIR
+# puts 'Clean...'
+# FileUtils::mkdir_p GENERATED_DIR
+# FileUtils::mkdir_p GENERATED_DIR + 'models/'
+# FileUtils::mkdir_p GENERATED_DIR + 'controllers/'
+# FileUtils::mkdir_p GENERATED_DIR + 'network/'
+# FileUtils::mkdir_p GENERATED_DIR + 'view_controllers/'
 
 # Load Templates
 
@@ -28,31 +28,31 @@ resources = YAML.load(File.read('resources.yml'))
 
 def generate_models(resource)
 	@model = resource
-	model_file = File.new('gen/models/' + @model['name'] + '.swift','w+')
+	model_file = File.new(GENERATED_DIR + resource['name'] + '.swift','w+')
 	model_file.write(ERB.new(@model_template).result)
-	puts '- ' + @model['name'].capitalize
+	puts '- ' + resource['name']
 end
 
 def generate_controllers(resource)
 	@ctrl = resource
-	controller_file = File.new('gen/controllers/' + @ctrl['name'].capitalize + 'Controller.swift', 'w+')
+	controller_file = File.new(GENERATED_DIR + resource['name'] + 'Controller.swift', 'w+')
 	controller_file.write(ERB.new(@controller_template).result)
-	puts '- ' + @ctrl['name'].capitalize + 'Controller'
+	puts '- ' + resource['name'] + 'Controller'
 end
 
 def generate_networking(resource)
 	@net = resource
-	request_provider_file = File.new('gen/network/Network' + @net['name'].capitalize + 'Provider.swift','w+')
+	request_provider_file = File.new(GENERATED_DIR + 'Network' + resource['name'] + 'Provider.swift','w+')
 	request_provider_file.write(ERB.new(@request_provider_template).result)
-	puts '- ' + @net['name'].capitalize + 'RequestProvider'
+	puts '- ' + resource['name'] + 'RequestProvider'
 end
 
 def generate_view_controllers(resource)
 	@vc = resource
 	if @vc["methods"]["all"]
-		vc_file = File.new('gen/view_controllers/' + @vc['name'].capitalize + 'TableViewController.swift','w+')
+		vc_file = File.new(GENERATED_DIR + resource['name'] + 'TableViewController.swift','w+')
 		vc_file.write(ERB.new(@table_view_controller_template).result)
-		puts '- ' + @vc['name'].capitalize + 'TableViewController'
+		puts '- ' + resource['name'] + 'TableViewController'
 	end
 end
 

@@ -1,9 +1,9 @@
 import Foundation
 
-class <%= @vc["name"].capitalize %>TableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, Network<%= @vc["name"].capitalize %>Delegate {
+class <%= @vc["name"] %>TableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, Network<%= @vc["name"] %>Delegate {
 
     var <%= @vc["name"].downcase %>List:[Device] = []
-    let <%= @vc["name"].downcase %>Controller:<%= @vc["name"].capitalize %>Controller = <%= @vc["name"].capitalize %>Controller(delegate: self)
+    let <%= @vc["name"].downcase %>Controller:<%= @vc["name"] %>Controller = <%= @vc["name"] %>Controller(delegate: self)
 
     override func viewDidLoad(){
         <%= @vc["name"].downcase %>Controller.getAll()
